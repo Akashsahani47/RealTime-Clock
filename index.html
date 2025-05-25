@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>JS Clock Project</title>
+ <style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgb(56, 56, 56);
+    color: #cabe7c;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .Clock_container {
+    text-align: center;
+    border: 1px solid #FFD700;
+    font-size: 48px;
+    padding: 20px 60px;
+    border-radius: 10px;
+    background-color: rgb(78, 105, 96);
+    margin-bottom: 30px; 
+  }
+
+  button {
+    padding: 15px 30px;
+    color: #FFD700;
+    background-color: rgb(78, 105, 96);
+    border: 2px solid black;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #5f8579;
+    transform: scale(1.05);
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+ </style>
+</head>
+<body>
+
+ <div class="Clock_container">
+   <h1 class="clock">00:00:00</h1>
+ </div>
+
+ <button onclick="startClock()">Start Clock</button>
+
+ <audio id="tickSound" src="./ticking-clock.mp3" preload="auto"></audio>
+
+ <script>
+  function startClock() {
+    document.querySelector('button').style.display = 'none'; 
+    const element = document.querySelector('.clock');
+    const sound = document.getElementById('tickSound');
+
+    setInterval(() => {
+      const time = new Date();
+      const option = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+      element.textContent = time.toLocaleTimeString('en-US', option);
+      sound.currentTime = 0;
+      sound.play();
+    }, 1000);
+  }
+ </script>
+</body>
+</html>
